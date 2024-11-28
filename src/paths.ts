@@ -8,8 +8,6 @@ export const paths = {
     },
   },
   dashboard: {
-    overview: '/dashboard',
-    analytics: '/dashboard/analytics',
     notifications: '/dashboard/notifications',
     preferences: '/dashboard/preferences',
     blank: '/dashboard/blank',

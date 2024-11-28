@@ -11,10 +11,16 @@ import { CaretDown as CaretDownIcon } from '@phosphor-icons/react/dist/ssr/Caret
 import { CaretRight as CaretRightIcon } from '@phosphor-icons/react/dist/ssr/CaretRight';
 import { X as XIcon } from '@phosphor-icons/react/dist/ssr/X';
 
+
+
 import type { NavItemConfig } from '@/types/nav';
 import { paths } from '@/paths';
 import { isNavItemActive } from '@/lib/is-nav-item-active';
 import { DynamicLogo } from '@/components/core/logo';
+
+
+
+
 
 // NOTE: First level elements are groups.
 
@@ -27,7 +33,7 @@ const navItems = [
       {
         key: 'dashboard',
         title: 'Dashboard',
-        items: [{ key: 'overview', title: 'Overview', href: paths.dashboard.overview }],
+        items: [{ key: 'overview', title: 'Overview', href: paths.dashboard.notifications }],
       },
       {
         key: 'marketing',

@@ -4,8 +4,14 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
+
+
 import type { NavItemConfig } from '@/types/nav';
 import { paths } from '@/paths';
+
+
+
+
 
 interface GroupConfig {
   key: string;
@@ -17,7 +23,7 @@ const groups: GroupConfig[] = [
   {
     key: 'group-0',
     title: 'Dashboard',
-    items: [{ key: 'overview', title: 'Overview', href: paths.dashboard.overview }],
+    items: [{ key: 'overview', title: 'Overview', href: paths.dashboard.notifications }],
   },
 ];
 

@@ -4,9 +4,15 @@ import * as React from 'react';
 import { useRouter } from 'next/navigation';
 import Alert from '@mui/material/Alert';
 
+
+
 import { paths } from '@/paths';
 import { logger } from '@/lib/default-logger';
 import { useUser } from '@/hooks/use-user';
+
+
+
+
 
 export interface GuestGuardProps {
   children: React.ReactNode;
@@ -29,7 +35,7 @@ export function GuestGuard({ children }: GuestGuardProps): React.JSX.Element | n
 
     if (user) {
       logger.debug('[GuestGuard]: User is logged in, redirecting to dashboard');
-      router.replace(paths.dashboard.overview);
+      router.replace(paths.dashboard.notifications);
       return;
     }
 
