@@ -3,6 +3,7 @@
 import React from 'react';
 import { CircularProgress, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import dayjs from 'dayjs';
 
 import type { ColumnDef } from '@/components/core/data-table';
 import { DataTable } from '@/components/core/data-table';
@@ -24,10 +25,10 @@ const getColumns = () =>
     {
       formatter: (row): React.JSX.Element => (
         <Typography sx={{ whiteSpace: 'nowrap' }} variant="inherit">
-          {row.user?.firstname}
+          {row.notificationType}
         </Typography>
       ),
-      name: 'Firt Name',
+      name: 'Notification Type',
       width: '250px',
     },
     {
@@ -42,10 +43,10 @@ const getColumns = () =>
     {
       formatter: (row): React.JSX.Element => (
         <Typography sx={{ whiteSpace: 'nowrap' }} variant="inherit">
-          {row.read}
+          {dayjs(row.createdAt).format('YYYY-MM-DD HH:mm:ss')}
         </Typography>
       ),
-      name: 'Message Read',
+      name: 'Message Created At',
       width: '250px',
     },
   ] satisfies ColumnDef<Notification>[];

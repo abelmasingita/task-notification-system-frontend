@@ -1,12 +1,18 @@
+import type { NotificationType } from '@/utils/notificationtype';
+
 export interface Preference {
   id: number;
-  user: {
-    id: number;
-    firstname: string;
-    lastname: string;
-    username: string;
-    email: string;
-  };
-  notification_type: string;
-  enabled: boolean;
+  user: User;
+  notificationType: NotificationType;
+  isEnabled: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface User {
+  id: number;
+  firstname: string;
+  lastname: string;
+  username: string;
+  email: string;
 }

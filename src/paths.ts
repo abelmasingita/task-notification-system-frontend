@@ -9,9 +9,13 @@ export const paths = {
   },
   dashboard: {
     notifications: '/dashboard/notifications',
-    preferences: '/dashboard/preferences',
+    preferences: {
+      list: '/dashboard/preferences',
+      details: (preferenceId: string) => `/dashboard/preferences/${preferenceId}`,
+    },
     blank: '/dashboard/blank',
   },
+
   notAuthorized: '/errors/not-authorized',
   notFound: '/errors/not-found',
   internalServerError: '/errors/internal-server-error',

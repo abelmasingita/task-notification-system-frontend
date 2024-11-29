@@ -16,7 +16,7 @@ export const layoutConfig = {
       title: 'Notification System',
       items: [
         { key: 'notifications', title: 'Notifications', href: paths.dashboard.notifications, icon: 'house' },
-        { key: 'preferences', title: 'Preferences', href: paths.dashboard.preferences, icon: 'chart-pie' },
+        { key: 'preferences', title: 'Preferences', href: paths.dashboard.preferences.list, icon: 'chart-pie' },
       ],
     },
   ],

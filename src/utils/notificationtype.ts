@@ -1,0 +1,5 @@
+export enum NotificationType {
+  TASKUPDATED = 'TASK_UPDATED',
+  TASKASSIGNED = 'TASK_ASSIGNED',
+  TASKCOMPLETED = 'TASK_COMPLETED',
+}

@@ -4,10 +4,16 @@ import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 
+
+
 import { config } from '@/config';
 import { Preferences } from '@/components/dashboard/preferences/preferece-list';
 
-export const metadata = { title: `List | Customers | Dashboard | ${config.site.name}` } satisfies Metadata;
+
+
+
+
+export const metadata = { title: `List | Preferences | Dashboard | ${config.site.name}` } satisfies Metadata;
 
 export default function Page(): React.JSX.Element {
   return (
