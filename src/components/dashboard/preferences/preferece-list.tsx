@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Button, CircularProgress, IconButton, Popover, Typography } from '@mui/material';
+import { Button, Checkbox, CircularProgress, IconButton, Popover, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { DotsThree as DotsThreeIcon } from '@phosphor-icons/react/dist/ssr/DotsThree';
 
@@ -36,7 +36,7 @@ const getColumns = (handleOpenPopover: (event: React.MouseEvent<HTMLElement>, it
     {
       formatter: (row): React.JSX.Element => (
         <Typography sx={{ whiteSpace: 'nowrap' }} variant="inherit">
-          {row.isEnabled}
+          <Checkbox checked={row.isEnabled} sx={{ transform: 'scale(1.5)' }} />
         </Typography>
       ),
       name: 'Notification Enabled',

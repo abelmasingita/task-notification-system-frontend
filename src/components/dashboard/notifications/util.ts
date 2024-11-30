@@ -1,12 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
-
-
-import useWebSocket from '@/hooks/use-webscoket';
-
-
+import { getUserId } from '@/utils/auth';
 
 import axiosInstance from '../../../helper/axios-interceptor';
 import type { Notification } from './interfaces';
@@ -14,22 +9,16 @@ import type { Notification } from './interfaces';
 const useNotificationList = () => {
   const [items, setItems] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(false);
-
-  const { notifications, connected } = useWebSocket('ws://localhost:8080/ws', '2');
+  const userId = getUserId();
 
   useEffect(() => {
-    if (connected && notifications.length > 0) {
-      //latest notifications to the top of the list, maintaining most recent order
-      setItems((prevItems) => {
-        return [...notifications, ...prevItems];
-      });
-    }
-  }, [connected, notifications]);
+    void fetch();
+  }, []);
 
   const fetch = async () => {
     setLoading(true);
     try {
-      const response = await axiosInstance.get<Notification[]>(`/api/notifications/2`);
+      const response = await axiosInstance.get<Notification[]>(`/api/notifications/${userId}`);
       setItems(response?.data);
     } catch (error) {
       console.error('Error fetching messages', error);
@@ -37,12 +26,11 @@ const useNotificationList = () => {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    void fetch();
-  }, []);
+
   return {
     items,
     loading,
+    setItems,
   };
 };
 

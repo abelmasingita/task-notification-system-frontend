@@ -3,7 +3,9 @@
 import * as React from 'react';
 import RouterLink from 'next/link';
 import { useRouter } from 'next/navigation';
+import { setToken, setUserId } from '@/utils/auth';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { CircularProgress } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
@@ -13,18 +15,24 @@ import Link from '@mui/material/Link';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { Box } from '@mui/system';
 import { Eye as EyeIcon } from '@phosphor-icons/react/dist/ssr/Eye';
 import { EyeSlash as EyeSlashIcon } from '@phosphor-icons/react/dist/ssr/EyeSlash';
 import { Controller, useForm } from 'react-hook-form';
 import { z as zod } from 'zod';
 
+
+
 import { paths } from '@/paths';
-import { authClient } from '@/lib/auth/custom/client';
 import { useUser } from '@/hooks/use-user';
 
+
+
+import { useAuthenticate } from './util';
+
 const schema = zod.object({
-  email: zod.string().min(1, { message: 'Email is required' }).email(),
-  password: zod.string().min(1, { message: 'Password is required' }),
+  email: zod.string().min(5, { message: 'Username is required' }),
+  password: zod.string().min(5, { message: 'Password is required' }),
 });
 
 type Values = zod.infer<typeof schema>;
@@ -33,7 +41,7 @@ const defaultValues = { email: '', password: '' } satisfies Values;
 
 export function SignInForm(): React.JSX.Element {
   const router = useRouter();
-
+  const { loading, login, error, token } = useAuthenticate();
   const { checkSession } = useUser();
 
   const [showPassword, setShowPassword] = React.useState<boolean>();
@@ -43,26 +51,43 @@ export function SignInForm(): React.JSX.Element {
   const {
     control,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm<Values>({ defaultValues, resolver: zodResolver(schema) });
 
   const onSubmit = React.useCallback(
     async (values: Values): Promise<void> => {
       setIsPending(true);
-
-      const { error } = await authClient.signInWithPassword(values);
-
-      if (error) {
-        setError('root', { type: 'server', message: error });
-        setIsPending(false);
-        return;
-      }
-      await checkSession?.();
-      router.refresh();
+      await login(values.email, values.password);
+      setIsPending(false);
     },
-    [checkSession, router, setError]
+    [login]
   );
+
+  React.useEffect(() => {
+    if (token?.accessToken) {
+      setToken(token.accessToken);
+      setUserId(token.userId);
+      void checkSession?.();
+      router.push('/dashboard');
+    } else if (error) {
+      setIsPending(false);
+    }
+  }, [token, error, router, checkSession]);
+
+  if (loading || isPending) {
+    return (
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <Stack spacing={4}>
@@ -77,8 +102,8 @@ export function SignInForm(): React.JSX.Element {
               name="email"
               render={({ field }) => (
                 <FormControl error={Boolean(errors.email)}>
-                  <InputLabel>Email address</InputLabel>
-                  <OutlinedInput {...field} type="email" />
+                  <InputLabel>Username</InputLabel>
+                  <OutlinedInput {...field} type="text" />
                   {errors.email ? <FormHelperText>{errors.email.message}</FormHelperText> : null}
                 </FormControl>
               )}

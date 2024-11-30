@@ -1,5 +1,7 @@
 'use client';
 
+import { TOKEN_KEY, USER_ID } from '@/utils/auth';
+
 import type { User } from '@/types/user';
 
 function generateToken(): string {
@@ -76,12 +78,10 @@ class AuthClient {
   }
 
   async getUser(): Promise<{ data?: User | null; error?: string }> {
-    // Make API request
+    const token = localStorage.getItem(AuthKeys.TOKEN_KEY);
+    const userId = localStorage.getItem(AuthKeys.USER_ID);
 
-    // We do not handle the API, so just check if we have a token in localStorage.
-    const token = localStorage.getItem('custom-auth-token');
-
-    if (!token) {
+    if (!token || !userId) {
       return { data: null };
     }
 
@@ -89,10 +89,16 @@ class AuthClient {
   }
 
   async signOut(): Promise<{ error?: string }> {
-    localStorage.removeItem('custom-auth-token');
+    localStorage.removeItem(AuthKeys.TOKEN_KEY);
+    localStorage.removeItem(AuthKeys.USER_ID);
 
     return {};
   }
 }
 
 export const authClient = new AuthClient();
+
+export const AuthKeys = {
+  USER_ID,
+  TOKEN_KEY,
+};

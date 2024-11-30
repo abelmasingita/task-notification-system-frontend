@@ -6,18 +6,13 @@ import Divider from '@mui/material/Divider';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 
-import type { User } from '@/types/user';
+
+
 import { config } from '@/config';
 import { AuthStrategy } from '@/lib/auth/strategy';
+import { useAuthenticate } from '@/components/auth/custom/util';
 
 import { CustomSignOut } from './custom-sign-out';
-
-const user = {
-  id: 'USR-000',
-  name: 'Sofia Rivers',
-  avatar: '/assets/avatar.png',
-  email: 'sofia@devias.io',
-} satisfies User;
 
 export interface UserPopoverProps {
   anchorEl: null | Element;
@@ -26,6 +21,11 @@ export interface UserPopoverProps {
 }
 
 export function UserPopover({ anchorEl, onClose, open }: UserPopoverProps): React.JSX.Element {
+  const { getUser, user } = useAuthenticate();
+
+  React.useEffect(() => {
+    return void getUser();
+  }, []);
   return (
     <Popover
       anchorEl={anchorEl}
@@ -36,9 +36,9 @@ export function UserPopover({ anchorEl, onClose, open }: UserPopoverProps): Reac
       transformOrigin={{ horizontal: 'right', vertical: 'top' }}
     >
       <Box sx={{ p: 2 }}>
-        <Typography>{user.name}</Typography>
+        <Typography>{user?.username}</Typography>
         <Typography color="text.secondary" variant="body2">
-          {user.email}
+          {user?.email}
         </Typography>
       </Box>
       <Divider />

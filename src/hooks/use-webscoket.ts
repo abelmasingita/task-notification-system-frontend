@@ -1,18 +1,24 @@
 import { useEffect, useState } from 'react';
+import { getToken, getUserId } from '@/utils/auth';
 import { Client } from '@stomp/stompjs';
-
-
 
 import type { Notification } from '@/components/dashboard/notifications/interfaces';
 
-const useWebSocket = (url: string, userId: string) => {
+const useWebSocket = (url: string) => {
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [connected, setConnected] = useState(false);
+  const userId = getUserId();
+  const token = getToken();
 
   useEffect(() => {
+    if (!token) {
+      console.error('No token found, WebSocket connection will not be authenticated');
+      return;
+    }
+
     const client = new Client({
       brokerURL: url,
-      connectHeaders: {},
+      connectHeaders: { Authorization: `Bearer ${token}` },
       reconnectDelay: 5000,
       heartbeatIncoming: 500,
       heartbeatOutgoing: 400,

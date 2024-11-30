@@ -59,6 +59,7 @@ module.exports = {
     // Deactivated
     'no-console': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/prefer-promise-reject-errors': 'off',
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/naming-convention': 'off',
     '@typescript-eslint/dot-notation': 'off', // paths are used with a dot notation

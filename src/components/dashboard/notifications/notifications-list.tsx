@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { CircularProgress, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import dayjs from 'dayjs';
 
+import useWebSocket from '@/hooks/use-webscoket';
 import type { ColumnDef } from '@/components/core/data-table';
 import { DataTable } from '@/components/core/data-table';
 
@@ -52,10 +53,21 @@ const getColumns = () =>
   ] satisfies ColumnDef<Notification>[];
 
 export function Notifications(): React.JSX.Element {
-  const { items, loading } = useNotificationList();
+  const { items, setItems, loading } = useNotificationList();
   const columns = getColumns();
 
-  if (!items || loading) {
+  const { notifications, connected } = useWebSocket('ws://localhost:8080/ws'); //to be moved to .env
+
+  useEffect(() => {
+    if (connected && notifications.length > 0) {
+      //latest notifications to the top of the list, maintaining most recent order
+      setItems((prevItems) => {
+        return [...notifications, ...prevItems];
+      });
+    }
+  }, [connected, notifications, setItems]);
+
+  if (!items || loading /*|| !connected*/) {
     return (
       <Box
         sx={{

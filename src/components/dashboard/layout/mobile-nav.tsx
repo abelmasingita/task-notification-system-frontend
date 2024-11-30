@@ -10,13 +10,12 @@ import { ArrowSquareOut as ArrowSquareOutIcon } from '@phosphor-icons/react/dist
 import { CaretDown as CaretDownIcon } from '@phosphor-icons/react/dist/ssr/CaretDown';
 import { CaretRight as CaretRightIcon } from '@phosphor-icons/react/dist/ssr/CaretRight';
 
+
+
 import type { NavItemConfig } from '@/types/nav';
-import { paths } from '@/paths';
 import { isNavItemActive } from '@/lib/is-nav-item-active';
-import { Logo } from '@/components/core/logo';
 
 import { icons } from './nav-icons';
-import { WorkspacesSwitch } from './workspaces-switch';
 
 export interface MobileNavProps {
   onClose?: () => void;
@@ -64,14 +63,6 @@ export function MobileNav({ items = [], open, onClose }: MobileNavProps): React.
       onClose={onClose}
       open={open}
     >
-      <Stack spacing={2} sx={{ p: 2 }}>
-        <div>
-          <Box component={RouterLink} href={paths.home} sx={{ display: 'inline-flex' }}>
-            <Logo color="light" height={32} width={122} />
-          </Box>
-        </div>
-        <WorkspacesSwitch />
-      </Stack>
       <Box component="nav" sx={{ flex: '1 1 auto', p: 2 }}>
         {renderNavGroups({ items, onClose, pathname })}
       </Box>
