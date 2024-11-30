@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { webSocketUrl } from '@/utils/constants';
 import { CircularProgress, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import dayjs from 'dayjs';
@@ -56,7 +57,7 @@ export function Notifications(): React.JSX.Element {
   const { items, setItems, loading } = useNotificationList();
   const columns = getColumns();
 
-  const { notifications, connected } = useWebSocket('ws://localhost:8080/ws'); //to be moved to .env
+  const { notifications, connected } = useWebSocket(webSocketUrl); //to be moved to .env
 
   useEffect(() => {
     if (connected && notifications.length > 0) {
