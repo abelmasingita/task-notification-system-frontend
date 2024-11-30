@@ -22,7 +22,6 @@ module.exports = {
     },
   },
   rules: {
-    'no-console': 'warn',
     '@typescript-eslint/no-unused-vars': [
       'error',
       {
@@ -58,6 +57,10 @@ module.exports = {
     ],
 
     // Deactivated
+    'no-console': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/naming-convention': 'off',
     '@typescript-eslint/dot-notation': 'off', // paths are used with a dot notation
     '@typescript-eslint/no-misused-promises': 'off', // onClick with async fails
     '@typescript-eslint/no-non-null-assertion': 'off', // sometimes compiler is unable to detect
