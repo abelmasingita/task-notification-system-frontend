@@ -76,3 +76,40 @@ Make sure to update the WebSocket connection settings in the frontend to match t
 
 # Backend API: 
 * The backend provides task data and handles WebSocket communication for broadcasting task updates.
+
+# Demo
+
+* Landing
+
+![image](https://github.com/user-attachments/assets/c979fdc8-a588-4e0b-89c9-b8cd6f233b6e)
+
+
+* Sign In
+
+![image](https://github.com/user-attachments/assets/20747eb2-8dcf-46a4-a447-3012144418ef)
+
+
+* Dashboard
+
+![image](https://github.com/user-attachments/assets/84ae4c8a-c4a6-44d1-a282-962368a4d001)
+
+
+* Notifications
+
+![image](https://github.com/user-attachments/assets/a8defc91-f262-45a8-9573-2409e9b9067a)
+
+
+* Preferences
+
+![image](https://github.com/user-attachments/assets/3c560e44-6fcf-46ba-9e81-50775f000f80)
+
+
+* Settings
+
+![image](https://github.com/user-attachments/assets/d0a0bbd2-8dc5-4b1b-8a8f-8c180c456a40)
+
+
+* Profile
+
+![Uploading image.png…]()
+
