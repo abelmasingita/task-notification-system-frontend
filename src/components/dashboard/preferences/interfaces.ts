@@ -1,5 +1,9 @@
 import type { NotificationType } from '@/utils/notificationtype';
 
+
+
+
+
 export interface Preference {
   id: number;
   user: User;
@@ -15,4 +19,9 @@ export interface User {
   lastname: string;
   username: string;
   email: string;
+}
+
+export interface UpdatePreference {
+  notificationType: NotificationType;
+  isEnabled: boolean;
 }

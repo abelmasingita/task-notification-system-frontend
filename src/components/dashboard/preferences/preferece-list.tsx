@@ -6,12 +6,16 @@ import { Button, Checkbox, CircularProgress, IconButton, Popover, Typography } f
 import { Box } from '@mui/system';
 import { DotsThree as DotsThreeIcon } from '@phosphor-icons/react/dist/ssr/DotsThree';
 
+
+
 import { paths } from '@/paths';
 import type { ColumnDef } from '@/components/core/data-table';
 import { DataTable } from '@/components/core/data-table';
 
+
+
 import type { Preference } from './interfaces';
-import { usePreferenceList } from './util';
+import { usePreference } from './util';
 
 const getColumns = (handleOpenPopover: (event: React.MouseEvent<HTMLElement>, item: Preference) => void) =>
   [
@@ -60,7 +64,7 @@ const getColumns = (handleOpenPopover: (event: React.MouseEvent<HTMLElement>, it
   ] satisfies ColumnDef<Preference>[];
 
 export function Preferences(): React.JSX.Element {
-  const { items, loading } = usePreferenceList();
+  const { items, loading } = usePreference();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedItem, setSelectedItem] = useState<Preference | null>(null);
   const router = useRouter();

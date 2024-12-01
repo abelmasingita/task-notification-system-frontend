@@ -2,7 +2,10 @@ import { useState } from 'react';
 import axiosInstance from '@/helper/axios-interceptor';
 import { getUserId } from '@/utils/auth';
 
+
+
 import { AuthKeys } from '@/lib/auth/custom/client';
+import { useAlerts } from '@/hooks/use-alerts';
 
 interface AuthResponse {
   accessToken: string;
@@ -21,6 +24,7 @@ const useAuthenticate = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
   const userId = getUserId();
+  const { toast: alert } = useAlerts();
 
   const login = async (email: string, password: string) => {
     setLoading(true);
@@ -34,10 +38,13 @@ const useAuthenticate = () => {
           accessToken: response.data.accessToken,
           userId: response.data.userId,
         });
+
+        alert('Success', 'Login successful!', 'success');
       }
     } catch (err) {
-      console.error('Error on login', err);
-      setError('Invalid username or password');
+      const errorMessage = 'Invalid username or password';
+      //setError(err);
+      alert('Error', ` ${errorMessage}`, 'error');
     } finally {
       setLoading(false);
     }
