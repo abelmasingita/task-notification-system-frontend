@@ -111,5 +111,6 @@ Make sure to update the WebSocket connection settings in the frontend to match t
 
 * Profile
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/2822e007-8a21-4e30-914f-f6637de73ab3)
+
 
